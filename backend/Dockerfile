@@ -1,7 +1,7 @@
 FROM python:3.9-alpine
 
 WORKDIR /app
-COPY requirements.txt .
+COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
 ENV PYTHONUNBUFFERED 1
@@ -12,7 +12,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 RUN python manage.py migrate
-RUN python -m pip install --no-cache-dir -r requirements.txt
+
 RUN python manage.py collectstatic --noinput
 
 EXPOSE 8000
